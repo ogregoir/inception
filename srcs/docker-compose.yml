@@ -1,0 +1,26 @@
+version : '3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "443:443"
+    volumes:
+      - ./volumes/nginx:/etc/nginx
+    networks:
+      - wordpress-net
+    restart: always
+
+  wordpress:
+    build: ./wordpress
+    volumes:
+      - ./volumes/wordpress:/var/www/html
+    networks:
+      - wordpress-net
+    depends_on:
+      - mariadb
+    restart: always
+
+networks:
+  wordpress-net:
+    driver: bridge
