@@ -1,15 +1,17 @@
 FROM alpine:3.17
 
-RUN apk add --no-cache \
-    php81-fpm php81-mysqli wget tar
+RUN apk update && apk upgrade
+RUN apk add php83 \
+			php83-fpm \
+			php83-mysqli \
+			php83-phar \
+			curl \
+			php83-common \
+			php83-apache2 \
+			php83-iconv \ 
+			openrc
 
-RUN wget https://wordpress.org/latest.tar.gz && \
-    tar -xzf latest.tar.gz && \
-    mv wordpress /var/www/html && \
-    rm latest.tar.gz
+COPY    ./conf/init.sh / 
+RUN     chmod 777 /init.sh
 
-COPY ./www.conf /etc/php81/php-fpm.d/www.conf
-
-EXPOSE 9000
-
-CMD ["php-fpm81", "-F"]
+CMD [ "./init.sh" ]

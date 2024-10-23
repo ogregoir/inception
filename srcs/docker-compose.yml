@@ -2,7 +2,7 @@ version : '3'
 
 services:
   nginx:
-    build: ./nginx
+    build: ./requirement/nginx
     ports:
       - "443:443"
     volumes:
@@ -12,7 +12,7 @@ services:
     restart: always
 
   wordpress:
-    build: ./wordpress
+    build: ./requirements/wordpress
     volumes:
       - ./volumes/wordpress:/var/www/html
     networks:
@@ -21,6 +21,7 @@ services:
       - mariadb
     restart: always
 
+  
 networks:
   wordpress-net:
     driver: bridge
