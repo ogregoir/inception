@@ -24,10 +24,10 @@ services:
   mariadb :
     build: ./requirements/mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
-      MYSQL_DATABASE: your_database_name
-      MYSQL_USER: your_username
-      MYSQL_PASSWORD: your_password
+      MYSQL_ROOT_PASSWORD: "oce"
+      MYSQL_DATABASE: "maria"
+      MYSQL_USER: "invited"
+      MYSQL_PASSWORD: "oce"
     volumes:
       - ./volumes/db:/var/lib/mysql
     networks:
