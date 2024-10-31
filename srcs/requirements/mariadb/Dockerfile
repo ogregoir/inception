@@ -2,7 +2,7 @@ FROM alpine:3.20
 
 RUN apk update && apk upgrade && apk add mariadb mariadb-common mariadb-client mariadb-server-utils
 
-RUN	rm -rf /etc/mysql/my.cnf /etc/my.cnf ~/my.cnf
+RUN	rm -rf /etc/mysql/maria.conf /etc/maria.conf ~/my.cnf
 COPY conf/my.cnf /etc/mysql/my.cnf
 
 RUN	mkdir -p /run/mysqld
