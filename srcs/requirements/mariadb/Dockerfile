@@ -14,4 +14,6 @@ RUN	chown -R mysql /var/lib/mysql
 COPY conf/init.sh init.sh
 RUN	chmod +x init.sh
 
+EXPOSE 3306
+
 CMD ["./init.sh"]

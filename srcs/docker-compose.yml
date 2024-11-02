@@ -3,14 +3,16 @@ services:
     build: ./requirements/nginx
     ports:
       - "443:443"
+    env_file: .env
     networks:
       - wordpress-net
     restart: on-failure
 
   wordpress:
     build: ./requirements/wordpress
+    env_file: .env
     volumes:
-      - wordpress:/volumes/wordpress:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - wordpress-net
     depends_on:
@@ -23,10 +25,10 @@ services:
     build: ./requirements/mariadb
     env_file: .env
     volumes:
-      - mariadb:/volumes/db:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - wordpress-net
-    restart: unless-stopped
+    restart: on-failure
     expose:
       - "3306"
 
@@ -36,13 +38,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/login/data/wordpress'
+      device: '/home/ogregoir/data/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/login/data/mariadb'
+      device: '/home/ogregoir/data/mariadb'
   
 networks:
   wordpress-net:
