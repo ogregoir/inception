@@ -13,9 +13,11 @@ RUN apk --no-cache add php83 \
 			openrc
 
 RUN addgroup nginx && adduser --system --no-create-home --ingroup nginx nginx 
-COPY ./conf/www.conf /etc/php83/conf.d/www.conf
+COPY ./conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 COPY    ./conf/init.sh / 
 RUN     chmod 777 /init.sh
+
+EXPOSE 9000
 
 CMD [ "./init.sh" ]

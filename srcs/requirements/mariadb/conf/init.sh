@@ -23,4 +23,6 @@ mysql -u root -p${SQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABAS
 
 mysqladmin -u root -p"${SQL_ROOT_PASSWORD}" shutdown
 
+sed -i '/skip-networking/d' /etc/my.cnf.d/mariadb-server.cnf
+
 exec /usr/bin/mysqld --user=mysql --console

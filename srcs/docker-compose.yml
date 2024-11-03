@@ -1,12 +1,16 @@
 services:
   nginx:
     build: ./requirements/nginx
+    volumes:
+      - wordpress:/var/www/html
     ports:
       - "443:443"
     env_file: .env
     networks:
       - wordpress-net
-    restart: on-failure
+    depends_on:
+      - wordpress
+    restart: unless-stopped
 
   wordpress:
     build: ./requirements/wordpress
@@ -17,7 +21,7 @@ services:
       - wordpress-net
     depends_on:
       - mariadb
-    restart: on-failure
+    restart: unless-stopped
     expose: 
       - "9000"
 
@@ -28,7 +32,7 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - wordpress-net
-    restart: on-failure
+    restart: unless-stopped
     expose:
       - "3306"
 
